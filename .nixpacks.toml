@@ -1,0 +1,18 @@
+[phases.setup]
+nixPkgs = ["nodejs_22", "openssl", "libnss3", "chromium"]
+
+[phases.install]
+cmds = [
+  "corepack enable",
+  "corepack prepare pnpm@10.18.3 --activate",
+  "pnpm -v",
+  "PNPM_CONFIG_FROZEN_LOCKFILE=true NODE_ENV=development npm_config_production=false pnpm -r install --include=optional"
+]
+
+[phases.build]
+cmds = [
+  "npx turbo run build --cache-dir=.turbo"
+]
+
+[start]
+cmd = "pnpm --filter n8n start"
