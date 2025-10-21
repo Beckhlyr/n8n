@@ -1,7 +1,9 @@
 [phases.setup]
+# Forzamos Node 22 y dejamos que Nixpacks meta libs que usa Chromium/Playwright si las necesitas
 nixPkgs = ["nodejs_22", "openssl", "libnss3", "chromium"]
 
 [phases.install]
+# pnpm 10 + install recursivo del monorepo con optional deps y SIN modo producción
 cmds = [
   "corepack enable",
   "corepack prepare pnpm@10.18.3 --activate",
